@@ -105,6 +105,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("-p", "--port", help="location of flask api port on local host", default=5000)
     args = parser.parse_args()
-    app.run(host="0.0.0.0", port=args.port, debug=True)
+    app.run(host="127.0.0.1", port=args.port, debug=True)
 
    

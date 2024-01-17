@@ -59,24 +59,24 @@ export default class Navbar extends Component{
     appendStreamNode = async (type) => {
         const pattern = {
             local : /^https?:\/\/(localhost)*(:[0-9]+)?(\/)?$/,
-            share : /^https?:\/\/*([0-9]{5})*(-gradio)*(.app)?(\/)?$/,
+            share : /^https?:\/\/*([0-9]{5})*(-gradio)*(.live|.app)?(\/)?$/,
             hugginFace : /^https?:\/\/*(hf.space)\/*(embed)\/*([a-zA-Z0-9+_-]+)\/*([a-zA-Z0-9+_-]+)\/*([+])?(\/)?$/
         } 
 
-        if (this.state.name.length > 20 ||
-            this.state.text === ""||
-            this.state.menu.findIndex(element => {return element.name.toLowerCase() === this.state.name.toLowerCase() || element.host.includes(this.state.text) }) !== -1 ||
-            this.state.text.includes(" ") || 
-            (!pattern.local.test(this.state.text) &&
-            !pattern.share.test(this.state.text) &&
-            !pattern.hugginFace.test(this.state.text))){
+        // if (this.state.name.length > 20 ||
+        //     this.state.text === ""||
+        //     this.state.menu.findIndex(element => {return element.name.toLowerCase() === this.state.name.toLowerCase() || element.host.includes(this.state.text) }) !== -1 ||
+        //     this.state.text.includes(" ") || 
+        //     (!pattern.local.test(this.state.text) &&
+        //     !pattern.share.test(this.state.text) &&
+        //     !pattern.hugginFace.test(this.state.text))){
             
-                this.setState({
-                    'text': '',
-                    'name': '',
-                    'error': true})
-                return 
-            } 
+        //         this.setState({
+        //             'text': '',
+        //             'name': '',
+        //             'error': true})
+        //         return 
+        //     } 
 
         fetch(this.state.text, {method : "GET", mode: 'no-cors'}).then((re) => {
             fetch("http://localhost:2000/api/append/port", {method: 'POST', mode : 'cors', headers : { 'Content-Type' : 'application/json' }, body: JSON.stringify({file : "", kwargs : { type : type }, name : this.state.name === "" ?`temp_class_${this.temp_host++}` : `${this.state.name}`, port: 0 , host : this.state.text}) }).then(resp => {

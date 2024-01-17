@@ -1,6 +1,7 @@
 import sys
 sys.path.insert(0, "../")
 from src.resources import GradioModule, register
+# from resources import GradioModule, register
 
 @register(["text"], ["text"], examples=[["Luca Vivona"]])
 def Hello_World(name):
